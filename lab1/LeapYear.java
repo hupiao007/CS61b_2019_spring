@@ -6,9 +6,11 @@ public class LeapYear {
     /** return True if the given year is a leapyear, if not return False */
     public static boolean isLeapYear(int year) {
         if year % 400 == 0 or (year % 4 == 0 and year % 100 != 0) {
-            return True
+            return True;
         }
-        else {return False}
+        else {
+            return False;
+        }
     }
 
     /** Calls isLeapYear to print correct statement.
@@ -19,6 +21,22 @@ public class LeapYear {
             System.out.printf("%d is a leap year.\n", year);
         } else {
             System.out.printf("%d is not a leap year.\n", year);
+        }
+    }
+
+    public static int fib(int n) {
+        if n == 0 or n == 1{
+            return n;
+        }else {
+            return fib(int n - 1) + fib(int n - 2);
+        }
+    }
+
+    public static int fib2(int n, int k, int f0, int f1) {
+        if (n == k) { 
+            return f0;
+        } else {
+            return fib2(n, k + 1, f1, f0 + f1);
         }
     }
 
@@ -38,4 +56,3 @@ public class LeapYear {
         }
     }
 }
-
