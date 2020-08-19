@@ -82,8 +82,38 @@ public class IntList {
 
     public static IntList dcatenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
-    }
+        /** (Failed) Use iteration to modify A into A + B. */
+        if (A == null) {
+            A = B;
+            return A;
+            }
+        else if (B == null) {
+            return A;
+        }
+        else {
+            IntList test_A = A;
+            while (test_A.rest != null) {
+                test_A = test_A.rest;
+            }
+            test_A.rest = B;
+            return A;
+            }
+        }
+
+
+        /** Using recursion.
+        if (A == null) {
+            A = B;
+            return A;
+        } else if (A.rest == null) {
+            A.rest = B;
+            return A;
+        }
+        A.rest = dcatenate(A.rest, B);
+        return A;
+
+
+    } */
 
     /**
      * Returns a list consisting of the elements of A followed by the
@@ -91,7 +121,33 @@ public class IntList {
      */
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        /** Use recursion to catenate A and B.
+        if (A == null) {
+            return B;
+        } else if (B == null) {
+            return A;
+        } else{
+            IntList A_B = new IntList(A.first, catenate(A.rest, B));
+            return A_B;
+        } */
+
+        /** Use uteration to catenate A and B. */
+        if (A == null) {
+            return B;
+        } else if (B == null) {
+            return A;
+        } else{
+            IntList A_B = new IntList(A.first, null);
+            IntList true_A_B = A_B;
+            IntList p = A.rest;
+            while (p != null) {
+                A_B.rest = new IntList(p.first, null);
+                p = p.rest;
+                A_B = A_B.rest;
+            }
+            A_B.rest = B;
+            return true_A_B;
+        }
     }
 
 
