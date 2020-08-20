@@ -60,8 +60,6 @@ public class NBody {
         for (Body b : bodies) {
             b.draw();
         }
-
-
         /* Shows the drawing to the screen, and waits 2000 milliseconds. */
         StdDraw.show();
         StdDraw.pause(2000);
