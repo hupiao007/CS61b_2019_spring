@@ -5,7 +5,7 @@ public class LinkedListDeque<T> {
         public T item;
         public LinkedNode prev;
         public LinkedNode next;
-
+        // constructor
         public LinkedNode(T x) {
             item = x;
             prev = this;
@@ -17,11 +17,19 @@ public class LinkedListDeque<T> {
     public LinkedNode sentinel;
 
     //constructor
-    public LinkedListDeque() {
+    public LinkedListDeque () {
         size = 0;
         sentinel = new LinkedNode((T) "Babe");
     }
 
+    /** Creates a deep copy of other. */
+    public LinkedListDeque(LinkedListDeque other) {
+        LinkedNode sentinel = new LinkedNode((T) "Babe");
+        for (int i = 0; i < other.size; i += 1) {
+            T item_i = (T) other.get(i);
+            addLast(item_i);
+        }
+    }
     /** Adds an item of type T to the front of the deque. */
     public void addFirst(T item) {
         LinkedNode added_first = new LinkedNode(item);
@@ -51,6 +59,8 @@ public class LinkedListDeque<T> {
         return size;
     }
 
+    /** Prints the items in the deque from first to last, separated by a space.
+     * Once all the items have been printed, print out a new line. */
     public void printDeque() {
         LinkedNode p = sentinel;
         while (p.next != sentinel) {
@@ -61,6 +71,7 @@ public class LinkedListDeque<T> {
         System.out.println();
     }
 
+    /** Removes and returns the item at the front of the deque. */
     public T removeFirst() {
         if (size == 0) {
             return null;
@@ -72,6 +83,7 @@ public class LinkedListDeque<T> {
         return removed_f;
     }
 
+    /** Removes and returns the item at the back of the deque. */
     public T removeLast() {
         if (size == 0) {
             return null;
@@ -83,6 +95,7 @@ public class LinkedListDeque<T> {
         return removed_l;
     }
 
+    /** Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth. */
     public T get(int index) {
         if (index >= size) {
             return null;
@@ -93,5 +106,24 @@ public class LinkedListDeque<T> {
             index -= 1;
         }
         return p.item;
+    }
+
+    /** Private helper method for get recursive. */
+    private T getRecursive(LinkedNode p, int index) {
+        if (index == 0) {
+            return p.item;
+        } else {
+            p = p.next;
+            return getRecursive(p, index -1);
+        }
+    }
+    /** Same as get, but uses recursion. */
+    public T getRecursive(int index) {
+        if (index >= size) {
+            return null;
+        } else {
+            LinkedNode p = this.sentinel.next;
+            return getRecursive(p, index);
+        }
     }
 }
