@@ -1,6 +1,5 @@
 /** Project 0 */
 public class Body{
-
     /** instance variables */
     public double xxPos; //Its current x position
     public double yyPos; //Its current y position
