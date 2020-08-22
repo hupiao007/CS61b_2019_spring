@@ -16,6 +16,12 @@ public class LinkedListDeque<T> {
     private int size = 0;
     private LinkedNode sentinel = new LinkedNode((T) "babe");
 
+    //constructor
+    public LinkedListDeque() {
+        sentinel = new LinkedNode((T) "babe");
+        size = 0;
+    }
+
     /** Creates a deep copy of other. */
     public LinkedListDeque(LinkedListDeque other) {
         sentinel = new LinkedNode((T) "Babe");
