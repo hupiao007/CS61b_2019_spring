@@ -1,7 +1,7 @@
 /** Build the linked list base. */
 public class LinkedListDeque<T> {
     /** Create a node for doubly linked list. */
-    public class LinkedNode {
+    private class LinkedNode {
         public T item;
         public LinkedNode prev;
         public LinkedNode next;
@@ -13,18 +13,12 @@ public class LinkedListDeque<T> {
         }
     }
 
-    public int size;
-    public LinkedNode sentinel;
-
-    //constructor
-    public LinkedListDeque () {
-        size = 0;
-        sentinel = new LinkedNode((T) "Babe");
-    }
+    private int size = 0;
+    private LinkedNode sentinel = new LinkedNode((T) "babe");
 
     /** Creates a deep copy of other. */
     public LinkedListDeque(LinkedListDeque other) {
-        LinkedNode sentinel = new LinkedNode((T) "Babe");
+        sentinel = new LinkedNode((T) "Babe");
         for (int i = 0; i < other.size; i += 1) {
             T item_i = (T) other.get(i);
             addLast(item_i);
@@ -36,6 +30,7 @@ public class LinkedListDeque<T> {
         sentinel.next.prev = added_first;
         added_first.next = sentinel.next;
         sentinel.next = added_first;
+        added_first.prev = sentinel;
         size += 1;
     }
 
@@ -122,7 +117,7 @@ public class LinkedListDeque<T> {
         if (index >= size) {
             return null;
         } else {
-            LinkedNode p = this.sentinel.next;
+            LinkedNode p = sentinel.next;
             return getRecursive(p, index);
         }
     }
