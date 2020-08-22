@@ -16,7 +16,7 @@ public class ArrayDeque<T> {
 
     /** Copy items from old_deque into new_deque. */
     private void copyDeque(T[] old_deque, T[] new_deque, int size) {
-        int first = minusOne(nextFirst);
+        int first = addOne(nextFirst);
         if (nextFirst >= nextLast) {
             System.arraycopy(old_deque, first, new_deque, 1, old_deque.length - first);
             System.arraycopy(old_deque, 0, new_deque, old_deque.length - first + 1,
@@ -30,11 +30,13 @@ public class ArrayDeque<T> {
 
     /** Check and resize the deque. */
     private T[] resize(T[] prev_deque) {
-        if (size/ prev_deque.length < 0.25) {
+        double l = prev_deque.length;
+        double ratio = size/l;
+        if (ratio < 0.25 && size > 8) {
             T[] a = (T[]) new Object[prev_deque.length / 2];
             copyDeque(prev_deque, a, size);
             return a;
-        } else if (size / prev_deque.length > 0.6) {
+        } else if (ratio > 0.5) {
             T[] a = (T[]) new Object[prev_deque.length * 2];
             copyDeque(prev_deque, a, size);
             return a;
@@ -94,6 +96,7 @@ public class ArrayDeque<T> {
             System.out.print(' ');
             tempF = addOne(tempF);
         }
+        System.out.print(deque[tempL]);
         System.out.println();
     }
 
