@@ -26,7 +26,7 @@ public class ArrayDeque<T> {
     }
 
     /** Check and resize the deque. */
-    private void resize(T[] prev_deque) {
+    private T[] resize(T[] prev_deque) {
         double s = size;
         while (s/ prev_deque.length < 0.25 && size > 8){
             T[] a = (T[]) new Object[prev_deque.length / 2];
@@ -37,6 +37,7 @@ public class ArrayDeque<T> {
             copyDeque(prev_deque, a, size);
             prev_deque = a;
         }
+        return prev_deque;
     }
 
     /** Minus index by 1. */
@@ -61,14 +62,14 @@ public class ArrayDeque<T> {
         deque[nextFirst] = item;
         nextFirst = minusOne(nextFirst);
         size ++;
-        resize(deque);
+        deque = resize(deque);
     }
 
     public void addLast(T item) {
         deque[nextLast] = item;
         nextLast = addOne(nextLast);
         size ++;
-        resize(deque);
+        deque = resize(deque);
     }
 
     public boolean isEmpty() {
@@ -102,7 +103,7 @@ public class ArrayDeque<T> {
         T temp = (T) deque[nextFirst];
         //deque[nextFirst] = null;
         size --;
-        resize(deque);
+        deque = resize(deque);
         return temp;
     }
 
@@ -114,7 +115,7 @@ public class ArrayDeque<T> {
         T temp = (T) deque[nextLast];
         //deque[nextLast] = null;
         size --;
-        resize(deque);
+        deque = resize(deque);
         return temp;
     }
 
