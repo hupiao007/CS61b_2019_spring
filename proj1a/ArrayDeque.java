@@ -14,7 +14,8 @@ public class ArrayDeque<T> {
     /** Copy items from old_deque into new_deque. */
     private void copyDeque(T[] oldD, T[] newDeque, int size) {
         int first = addOne(nextFirst);
-        if (nextFirst >= nextLast) {
+        int last = minusOne(nextLast);
+        if (first > last) {
             System.arraycopy(oldD, first, newDeque, 1, oldD.length - first);
             System.arraycopy(oldD, 0, newDeque, oldD.length - first + 1,
                     size - (oldD.length - first));
@@ -102,7 +103,7 @@ public class ArrayDeque<T> {
         }
         nextFirst = addOne(nextFirst);
         T temp = (T) deque[nextFirst];
-        //deque[nextFirst] = null;
+        deque[nextFirst] = null;
         size--;
         deque = resize(deque);
         return temp;
@@ -114,7 +115,7 @@ public class ArrayDeque<T> {
         }
         nextLast = minusOne(nextLast);
         T temp = (T) deque[nextLast];
-        //deque[nextLast] = null;
+        deque[nextLast] = null;
         size--;
         deque = resize(deque);
         return temp;
