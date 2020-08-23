@@ -106,7 +106,7 @@ public class ArrayDeque<T> {
         }
         nextFirst = addOne(nextFirst);
         T temp = (T) deque[nextFirst];
-        deque[nextFirst] = null;
+        //deque[nextFirst] = null;
         size --;
         resize(deque);
         return temp;
@@ -118,14 +118,20 @@ public class ArrayDeque<T> {
         }
         nextLast = minusOne(nextLast);
         T temp = (T) deque[nextLast];
-        deque[nextLast] = null;
+        //deque[nextLast] = null;
         size --;
         resize(deque);
         return temp;
     }
 
     public T get(int index) {
-        return deque[index];
+        index += addOne(nextFirst);
+        if (index < deque.length) {
+            return deque[index];
+        } else {
+            index -= deque.length;
+            return deque[index];
+        }
     }
 
     public ArrayDeque(ArrayDeque other) {
