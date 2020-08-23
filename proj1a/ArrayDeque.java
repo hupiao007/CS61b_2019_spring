@@ -12,7 +12,7 @@ public class ArrayDeque<T> {
     }
 
     /** Copy items from old_deque into new_deque. */
-    private void copyDeque(T[] oldD, T[] newDeque, int size) {
+    private void copyDeque(T[] oldD, T[] newDeque) {
         int first = addOne(nextFirst);
         int last = minusOne(nextLast);
         if (first > last) {
@@ -31,12 +31,12 @@ public class ArrayDeque<T> {
         double s = size;
         while (s / prevDeque.length < 0.25 && size > 8) {
             T[] a = (T[]) new Object[prevDeque.length / 2];
-            copyDeque(prevDeque, a, size);
+            copyDeque(prevDeque, a);
             prevDeque = a;
         }
         while (s / prevDeque.length > 0.5) {
             T[] a = (T[]) new Object[prevDeque.length * 2];
-            copyDeque(prevDeque, a, size);
+            copyDeque(prevDeque, a);
             prevDeque = a;
         }
         return prevDeque;
@@ -136,6 +136,6 @@ public class ArrayDeque<T> {
         deque = (T[]) new Object[other.deque.length];
         nextFirst = other.nextFirst;
         nextLast = other.nextLast;
-        copyDeque((T[]) other.deque, deque, size);
+        copyDeque((T[]) other.deque, deque);
     }
 }
