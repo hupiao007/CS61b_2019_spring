@@ -27,17 +27,15 @@ public class ArrayDeque<T> {
 
     /** Check and resize the deque. */
     private void resize(T[] prev_deque) {
-        double l = prev_deque.length;
-        while (size/l < 0.25 && size >8){
+        double s = size;
+        while (s/ prev_deque.length < 0.25 && size > 8){
             T[] a = (T[]) new Object[prev_deque.length / 2];
             copyDeque(prev_deque, a, size);
             prev_deque = a;
-            l = prev_deque.length;
-        } while(size/l > 0.5) {
+        } while(s/ prev_deque.length > 0.5) {
             T[] a = (T[]) new Object[prev_deque.length * 2];
             copyDeque(prev_deque, a, size);
             prev_deque = a;
-            l = prev_deque.length;
         }
     }
 
