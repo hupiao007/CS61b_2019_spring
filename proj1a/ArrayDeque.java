@@ -1,6 +1,3 @@
-import javax.swing.plaf.synth.SynthTextAreaUI;
-import java.awt.desktop.SystemEventListener;
-
 public class ArrayDeque<T> {
     private int size;
     private int nextFirst;
@@ -29,19 +26,18 @@ public class ArrayDeque<T> {
     }
 
     /** Check and resize the deque. */
-    private T[] resize(T[] prev_deque) {
+    private void resize(T[] prev_deque) {
         double l = prev_deque.length;
-        double ratio = size/l;
-        if (ratio < 0.25 && size > 8) {
+        while (size/l < 0.25 && size >8){
             T[] a = (T[]) new Object[prev_deque.length / 2];
             copyDeque(prev_deque, a, size);
-            return a;
-        } else if (ratio > 0.5) {
+            prev_deque = a;
+            l = prev_deque.length;
+        } while(size/l > 0.5) {
             T[] a = (T[]) new Object[prev_deque.length * 2];
             copyDeque(prev_deque, a, size);
-            return a;
-        } else {
-            return prev_deque;
+            prev_deque = a;
+            l = prev_deque.length;
         }
     }
 
@@ -67,14 +63,14 @@ public class ArrayDeque<T> {
         deque[nextFirst] = item;
         nextFirst = minusOne(nextFirst);
         size ++;
-        deque = resize(deque);
+        resize(deque);
     }
 
     public void addLast(T item) {
         deque[nextLast] = item;
         nextLast = addOne(nextLast);
         size ++;
-        deque = resize(deque);
+        resize(deque);
     }
 
     public boolean isEmpty() {
