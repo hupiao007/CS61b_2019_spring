@@ -5,47 +5,48 @@ public class ArrayDeque<T> {
     private T[] deque;
     //constructor, creates an empty deque
     public ArrayDeque() {
-        deque= (T[]) new Object[8];
+        deque = (T[]) new Object[8];
         size = 0;
         nextFirst = 0;
         nextLast = 1;
     }
 
     /** Copy items from old_deque into new_deque. */
-    private void copyDeque(T[] old_deque, T[] new_deque, int size) {
+    private void copyDeque(T[] oldD, T[] newDeque, int size) {
         int first = addOne(nextFirst);
         if (nextFirst >= nextLast) {
-            System.arraycopy(old_deque, first, new_deque, 1, old_deque.length - first);
-            System.arraycopy(old_deque, 0, new_deque, old_deque.length - first + 1,
-                    size -(old_deque.length -first));
+            System.arraycopy(oldD, first, newDeque, 1, oldD.length - first);
+            System.arraycopy(oldD, 0, newDeque, oldD.length - first + 1,
+                    size - (oldD.length - first));
         } else {
-            System.arraycopy(old_deque, first, new_deque, 1, size);
+            System.arraycopy(oldD, first, newDeque, 1, size);
         }
         nextFirst = 0;
-        nextLast = size +1;
+        nextLast = size + 1;
     }
 
     /** Check and resize the deque. */
-    private T[] resize(T[] prev_deque) {
+    private T[] resize(T[] prevDeque) {
         double s = size;
-        while (s/ prev_deque.length < 0.25 && size > 8){
-            T[] a = (T[]) new Object[prev_deque.length / 2];
-            copyDeque(prev_deque, a, size);
-            prev_deque = a;
-        } while(s/ prev_deque.length > 0.5) {
-            T[] a = (T[]) new Object[prev_deque.length * 2];
-            copyDeque(prev_deque, a, size);
-            prev_deque = a;
+        while (s / prevDeque.length < 0.25 && size > 8) {
+            T[] a = (T[]) new Object[prevDeque.length / 2];
+            copyDeque(prevDeque, a, size);
+            prevDeque = a;
         }
-        return prev_deque;
+        while (s / prevDeque.length > 0.5) {
+            T[] a = (T[]) new Object[prevDeque.length * 2];
+            copyDeque(prevDeque, a, size);
+            prevDeque = a;
+        }
+        return prevDeque;
     }
 
     /** Minus index by 1. */
     private int minusOne(int index) {
-        if (index == 0){
-            return deque.length -1;
+        if (index == 0) {
+            return deque.length - 1;
         } else {
-            return index -1;
+            return index - 1;
         }
     }
     /** Increase index by 1. */
@@ -53,7 +54,7 @@ public class ArrayDeque<T> {
         if (index == deque.length - 1) {
             return 0;
         } else {
-            return index +1;
+            return index + 1;
         }
     }
 
@@ -61,14 +62,14 @@ public class ArrayDeque<T> {
     public void addFirst(T item) {
         deque[nextFirst] = item;
         nextFirst = minusOne(nextFirst);
-        size ++;
+        size++;
         deque = resize(deque);
     }
 
     public void addLast(T item) {
         deque[nextLast] = item;
         nextLast = addOne(nextLast);
-        size ++;
+        size++;
         deque = resize(deque);
     }
 
@@ -102,7 +103,7 @@ public class ArrayDeque<T> {
         nextFirst = addOne(nextFirst);
         T temp = (T) deque[nextFirst];
         //deque[nextFirst] = null;
-        size --;
+        size--;
         deque = resize(deque);
         return temp;
     }
@@ -114,7 +115,7 @@ public class ArrayDeque<T> {
         nextLast = minusOne(nextLast);
         T temp = (T) deque[nextLast];
         //deque[nextLast] = null;
-        size --;
+        size--;
         deque = resize(deque);
         return temp;
     }

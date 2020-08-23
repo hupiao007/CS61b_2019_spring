@@ -2,9 +2,9 @@
 public class LinkedListDeque<T> {
     /** Create a node for doubly linked list. */
     private class LinkedNode {
-        public T item;
-        public LinkedNode prev;
-        public LinkedNode next;
+        private T item;
+        private LinkedNode prev;
+        private LinkedNode next;
         // constructor
         public LinkedNode(T x) {
             item = x;
@@ -26,27 +26,27 @@ public class LinkedListDeque<T> {
     public LinkedListDeque(LinkedListDeque other) {
         sentinel = new LinkedNode((T) "Babe");
         for (int i = 0; i < other.size; i += 1) {
-            T item_i = (T) other.get(i);
-            addLast(item_i);
+            T itemi = (T) other.get(i);
+            addLast(itemi);
         }
     }
     /** Adds an item of type T to the front of the deque. */
     public void addFirst(T item) {
-        LinkedNode added_first = new LinkedNode(item);
-        sentinel.next.prev = added_first;
-        added_first.next = sentinel.next;
-        sentinel.next = added_first;
-        added_first.prev = sentinel;
+        LinkedNode addedFirst = new LinkedNode(item);
+        sentinel.next.prev = addedFirst;
+        addedFirst.next = sentinel.next;
+        sentinel.next = addedFirst;
+        addedFirst.prev = sentinel;
         size += 1;
     }
 
     /** Adds an item of type T to the back of the deque. */
     public void addLast(T item) {
-        LinkedNode added_last = new LinkedNode(item);
-        sentinel.prev.next = added_last;
-        added_last.prev = sentinel.prev;
-        added_last.next = sentinel;
-        sentinel.prev = added_last;
+        LinkedNode addedLast = new LinkedNode(item);
+        sentinel.prev.next = addedLast;
+        addedLast.prev = sentinel.prev;
+        addedLast.next = sentinel;
+        sentinel.prev = addedLast;
         size += 1;
     }
 
@@ -77,11 +77,11 @@ public class LinkedListDeque<T> {
         if (size == 0) {
             return null;
         }
-        T removed_f = sentinel.next.item;
+        T removedF = sentinel.next.item;
         sentinel.next.next.prev = sentinel;
         sentinel.next = sentinel.next.next;
         size -= 1;
-        return removed_f;
+        return removedF;
     }
 
     /** Removes and returns the item at the back of the deque. */
@@ -89,11 +89,11 @@ public class LinkedListDeque<T> {
         if (size == 0) {
             return null;
         }
-        T removed_l = sentinel.prev.item;
+        T removedL = sentinel.prev.item;
         sentinel.prev.prev.next = sentinel;
         sentinel.prev = sentinel.prev.prev;
         size -= 1;
-        return removed_l;
+        return removedL;
     }
 
     /** Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth. */
@@ -115,7 +115,7 @@ public class LinkedListDeque<T> {
             return p.item;
         } else {
             p = p.next;
-            return getRecursive(p, index -1);
+            return getRecursive(p, index - 1);
         }
     }
     /** Same as get, but uses recursion. */
