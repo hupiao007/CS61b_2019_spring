@@ -86,19 +86,17 @@ public class IntList {
         if (A == null) {
             A = B;
             return A;
-            }
-        else if (B == null) {
+        } else if (B == null) {
             return A;
-        }
-        else {
+        } else {
             IntList test_A = A;
             while (test_A.rest != null) {
                 test_A = test_A.rest;
             }
             test_A.rest = B;
             return A;
-            }
         }
+    }
 
 
         /** Using recursion.
@@ -136,7 +134,7 @@ public class IntList {
             return B;
         } else if (B == null) {
             return A;
-        } else{
+        } else {
             IntList A_B = new IntList(A.first, null);
             IntList true_A_B = A_B;
             IntList p = A.rest;
