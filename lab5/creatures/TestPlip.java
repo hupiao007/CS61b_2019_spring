@@ -32,10 +32,14 @@ public class TestPlip {
 
     @Test
     public void testReplicate() {
-        // TODO
+        Plip p = new Plip(2);
+        Plip newP = p.replicate();
+        assertEquals(1, p.energy(), 0.01);
+        assertEquals(1, newP.energy(), 0.01);
+        assertNotEquals(p, newP);
     }
 
-    //@Test
+    @Test
     public void testChoose() {
 
         // No empty adjacent spaces; stay.
@@ -50,7 +54,6 @@ public class TestPlip {
         Action expected = new Action(Action.ActionType.STAY);
 
         assertEquals(expected, actual);
-
 
         // Energy >= 1; replicate towards an empty space.
         p = new Plip(1.2);
@@ -96,7 +99,6 @@ public class TestPlip {
         expected = new Action(Action.ActionType.STAY);
 
         assertEquals(expected, actual);
-
 
         // We don't have Cloruses yet, so we can't test behavior for when they are nearby right now.
     }
