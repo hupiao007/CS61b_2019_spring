@@ -1,59 +1,126 @@
 package es.datastructur.synthesizer;
 import java.util.Iterator;
 
-//TODO: Make sure to that this class and all of its methods are public
-//TODO: Make sure to add the override tag for all overridden methods
-//TODO: Make sure to make this class implement BoundedQueue<T>
-
-public class ArrayRingBuffer<T>  {
-    /* Index for the next dequeue or peek. */
+public class ArrayRingBuffer<T> implements BoundedQueue<T> {
+    /* Index for the next dequeue or peek.
+    * Index of the first inserted item. */
     private int first;
-    /* Index for the next enqueue. */
+    /* Index for the next enqueue.
+    * Index for next item to be inserted in. */
     private int last;
     /* Variable for the fillCount. */
     private int fillCount;
     /* Array for storing the buffer data. */
     private T[] rb;
+    private int cap;
 
     /**
      * Create a new ArrayRingBuffer with the given capacity.
      */
     public ArrayRingBuffer(int capacity) {
-        // TODO: Create new array with capacity elements.
-        //       first, last, and fillCount should all be set to 0.
+        cap = capacity;
+        rb = (T[]) new Object[cap];
+        first = 0;
+        last = 0;
+        fillCount = 0;
     }
 
     /**
      * Adds x to the end of the ring buffer. If there is no room, then
      * throw new RuntimeException("Ring buffer overflow").
      */
+    private int minusIndex(int a) {
+        if (a == 0) {
+            a = cap - 1;
+        } else {
+            a--;
+        }
+        return a;
+    }
+
+    private int addIndex(int a) {
+        if (a == cap - 1) {
+            a = 0;
+        } else {
+            a++;
+        }
+        return a;
+    }
+
+    private void testExcepFull() {
+        if (this.isFull()) {
+            throw new RuntimeException("Ring buffer overflow");
+        }
+    }
+
+    private void testExcepEmpty() {
+        if (this.isEmpty()) {
+            throw new RuntimeException("Ring buffer overflow");
+        }
+    }
+
+    @Override
     public void enqueue(T x) {
-        // TODO: Enqueue the item. Don't forget to increase fillCount and update
-        //       last.
-        return;
+        testExcepFull();
+        rb[last] = x;
+        fillCount++;
+        last = addIndex(last);
     }
 
     /**
      * Dequeue oldest item in the ring buffer. If the buffer is empty, then
      * throw new RuntimeException("Ring buffer underflow").
      */
+    @Override
     public T dequeue() {
-        // TODO: Dequeue the first item. Don't forget to decrease fillCount and
-        //       update first.
-        return null;
+        testExcepEmpty();
+        T dT= rb[first];
+        rb[first] = null;
+        fillCount--;
+        first = addIndex(first);
+        return dT;
     }
 
     /**
      * Return oldest item, but don't remove it. If the buffer is empty, then
      * throw new RuntimeException("Ring buffer underflow").
      */
+    @Override
     public T peek() {
-        // TODO: Return the first item. None of your instance variables should
-        //       change.
-        return null;
+        testExcepEmpty();
+        return rb[first];
     }
 
-    // TODO: When you get to part 4, implement the needed code to support
-    //       iteration and equals.
+    @Override
+    public int capacity() {
+        return cap;
+    }
+
+    @Override
+    public int fillCount() {
+        return fillCount;
+    }
+
+    public Iterator<T> iterator() {
+        return new ArryRingIterator();
+    }
+
+    private class ArryRingIterator implements Iterator<T> {
+        int countIndex;
+        int pos;
+        public ArryRingIterator() {
+            countIndex = 0;
+            pos = last;
+        }
+        public boolean hasNext() {
+            return countIndex < fillCount;
+        }
+
+        public T next() {
+            T i = rb[pos];
+            pos = addIndex(pos);
+            countIndex++;
+            return i;
+        }
+    }
 }
-    // TODO: Remove all comments that say TODO when you're done.
