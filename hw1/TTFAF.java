@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.util.Base64;
 import java.util.zip.GZIPInputStream;
 
+
 /**
  * This code does some stuff. Run it (with sound on!) to find out what stuff it does!
  * Requires completion of CS 61B Homework 1.
@@ -22,8 +23,8 @@ public class TTFAF {
         }
 
         // You can also do this:
-        // GuitarPlayer player = new GuitarPlayer(new java.io.File("path/to/music.mid"));
-        // player.play();
+        //GuitarPlayer player = new GuitarPlayer(new java.io.File("path/to/music.mid"));
+        //player.play();
     }
 
     private static final String TTFAF =
@@ -182,4 +183,5 @@ public class TTFAF {
         + "YmW9jm7h7LZBcAqVUWwnOIK8aquEs7JOUD/zY0ArBk31oy1YvqODmDv95xTT7/6IMd58BSczuKTD"
         + "8wUeQqcz27kPJxu43Hxw06TZAE7u4PLOParlZEg8gv6CqnAAZQmXyw9nVEgRopMcLnNTqKj9wwb0"
         + "6zR/5Bb/AT7+4c9/APjxG/j/XQ2yXpqSAA==";
+
 }

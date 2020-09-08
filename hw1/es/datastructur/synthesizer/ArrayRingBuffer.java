@@ -48,13 +48,13 @@ public class ArrayRingBuffer<T> implements BoundedQueue<T> {
     }
 
     private void testExcepFull() {
-        if (this.isFull()) {
+        if (isFull()) {
             throw new RuntimeException("Ring buffer overflow");
         }
     }
 
     private void testExcepEmpty() {
-        if (this.isEmpty()) {
+        if (isEmpty()) {
             throw new RuntimeException("Ring buffer overflow");
         }
     }
@@ -122,5 +122,18 @@ public class ArrayRingBuffer<T> implements BoundedQueue<T> {
             countIndex++;
             return i;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o.getClass() != ArrayRingBuffer.class) {
+            return false;
+        }
+        while (iterator().hasNext()) {
+            if (((ArrayRingBuffer<T>) o).iterator().next() != iterator().next()) {
+                return false;
+            }
+        }
+        return true;
     }
 }
