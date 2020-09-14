@@ -1,3 +1,4 @@
+import java.awt.desktop.SystemEventListener;
 import java.util.Set;
 import java.util.HashSet;
 import static org.junit.Assert.*;
@@ -19,6 +20,7 @@ public class TestBSTMapExtra {
         }
         assertEquals(455, b.size()); //keys are there
         Set<String> keySet = b.keySet();
+        System.out.println(keySet.size());
         assertTrue(values.containsAll(keySet));
         assertTrue(keySet.containsAll(values));
     }
