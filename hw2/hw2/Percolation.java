@@ -72,7 +72,7 @@ public class Percolation {
         indexOutrange(row, col);
         int id = xyToID(row, col);
         int rootID = gridN.find(id);
-        return colorList[rootID] == 2;
+        return (colorList[rootID] == 2) || (colorList[id] == 2);
     }
 
     // number of open sites
