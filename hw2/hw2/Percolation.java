@@ -82,8 +82,8 @@ public class Percolation {
 
     // does the system percolate?
     public boolean percolates() {
-        for (int i = (N - 1) * N; i < N * N; i++) {
-            if (colorList[i] == 2) {
+        for (int i = 0; i < N; i++) {
+            if (isFull(N - 1, i)) {
                 return true;
             }
         }
