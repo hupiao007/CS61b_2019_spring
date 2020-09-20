@@ -26,7 +26,6 @@ public class TestNiceSpreadOomage {
             x.val = StdRandom.uniform(0, 1000000);
             return x;
         }
-
     }
 
     /** After you've written haveNiceHashCodeSpread,
